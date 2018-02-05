@@ -38,9 +38,10 @@ install:
     -t $DOCKER_USERNAME/$DOCKER_REPONAME .
 
 before_script:
-  - docker run -d -p 11862:11862 --name $DOCKER_REPONAME $DOCKER_USERNAME/$DOCKER_REPONAME
+  - sudo mkdir /data && echo "LICENSE-012345-6789" > /data/license.txt
+  - sudo docker run -d -p 11862:11862 -v /data:/data --name $DOCKER_REPONAME $DOCKER_USERNAME/$DOCKER_REPONAME
   - sleep 10
-  - docker logs $DOCKER_REPONAME
+  - sudo docker logs $DOCKER_REPONAME
 
 script:
   - docker ps | grep $DOCKER_REPONAME
