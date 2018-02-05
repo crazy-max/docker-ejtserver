@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  ejtserver:
+    image: crazymax/ejtserver:latest
+    volumes:
+      - ./data:/data
+    environment:
+      - TZ=Europe/Paris
+      - EJTSERVER_DISPLAY_HOSTNAMES=false
+      - LOG_LEVEL=INFO
+    restart: always
