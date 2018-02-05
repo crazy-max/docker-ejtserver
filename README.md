@@ -46,7 +46,7 @@ In this folder you will find those files :
 You also have access to these commands from the container :
 
 * `ejtserver` : This is the license server the daemon launch script. Commands available : `start|stop|run|run-redirect|status|restart|force-reload`.
-* `admin` : Admin tool is command line based of ejtserver, it allows you to list all active connections and to terminate selected connections. In addition, you can check out a temporary license for use in environments that have no access to the floating license server
+* `admin` : Admin tool command line based of ejtserver. It allows you to list all active connections and to terminate selected connections. In addition, you can check out a temporary license for use in environments that have no access to the floating license server
 
 Usage :
 
