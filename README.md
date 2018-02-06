@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/crazy-max/docker-ejtserver" target="_blank"><img height="128"src="https://raw.githubusercontent.com/crazy-max/docker-ejtserver/master/.res/docker-ejtserver.jsp"></a></p>
+<p align="center"><a href="https://github.com/crazy-max/docker-ejtserver" target="_blank"><img height="128"src="https://raw.githubusercontent.com/crazy-max/docker-ejtserver/master/.res/docker-ejtserver.jpg"></a></p>
 
 <p align="center">
   <a href="https://microbadger.com/images/crazymax/ejtserver"><img src="https://images.microbadger.com/badges/version/crazymax/ejtserver.svg?style=flat-square" alt="Version"></a>
