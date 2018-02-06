@@ -30,23 +30,12 @@ before_install:
   - export DOCKER_TAG=$(if [ "$BRANCH" == "master" ]; then echo "latest"; else echo $BRANCH; fi)
   - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH, DOCKER_TAG=$DOCKER_TAG"
 
-install:
+script:
   - |
     docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
     --build-arg VCS_REF=${TRAVIS_COMMIT::8} \
     --build-arg VERSION=${VERSION} \
     -t $DOCKER_USERNAME/$DOCKER_REPONAME .
-
-before_script:
-  - sudo mkdir /data
-  - sudo chown -R $USER. /data
-  - echo "LICENSE-012345-6789" > /data/license.txt
-  - docker run -d -p 11862:11862 -v /data:/data --name $DOCKER_REPONAME $DOCKER_USERNAME/$DOCKER_REPONAME
-  - sleep 10
-  - sudo docker logs $DOCKER_REPONAME
-
-script:
-  - docker ps | grep $DOCKER_REPONAME
 
 after_success:
   - test $TRAVIS_PULL_REQUEST = false
