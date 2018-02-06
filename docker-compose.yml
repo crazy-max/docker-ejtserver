@@ -7,6 +7,10 @@ services:
       - ./data:/data
     environment:
       - TZ=Europe/Paris
+      - EJTSERVER_VERSION=1.13
+      - EJTSERVER_DL_BASEURL=https://licenseserver.ej-technologies.com
+      - EJTSERVER_DL_USERNAME=my_ejt_username
+      - EJTSERVER_DL_PASSWORD=my_ejt_password
       - EJTSERVER_DISPLAY_HOSTNAMES=false
       - LOG_LEVEL=INFO
     restart: always

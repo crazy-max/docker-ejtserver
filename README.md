@@ -18,21 +18,27 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 
 * License server customizable via environment variables
 * Persistence of registration data and configuration in a single directory
+* A custom base url can be provided to download the ejtserver tarball
 
 ## Docker
 
 ### Environment variables
 
 * `TZ` : The timezone assigned to the container (default to `UTC`)
+* `EJTSERVER_VERSION` : EJT License Server version to install. See the [official changelog](https://www.ej-technologies.com/license/changelog.html) for a curated list. (default to `1.13`)
+* `EJTSERVER_DL_BASEURL` : Base url where EJT License Server unix tarball can be downloaded (default to `https://licenseserver.ej-technologies.com`)
+* `EJTSERVER_DL_USERNAME` : Username to download EJT License Server. Can be empty if you use a custom base url to download the ejtserver tarball without HTTP authentication
+* `EJTSERVER_DL_PASSWORD` : Password linked to the username
 * `EJTSERVER_DISPLAY_HOSTNAMES` : If you want to see host names instead of IP addresses (default to `false`)
 * `LOG_LEVEL` : [Log4J log level](https://logging.apache.org/log4j/2.x/manual/customloglevels.html) of the EJT License Server (default to `INFO`)
 
 ### Volumes
 
-* `/data` : Contains registration data and configuration
+* `/data` : Contains registration data, configuration and the downloaded EJT License Server unix tarball
 
 In this folder you will find those files :
 
+* `ejtserver_unix_*.tar.gz` : The downloaded EJT License Server unix tarball
 * `ip.txt` : If you would like to allow only certain IP addresses, enter one IP address per line. If no IP addresses are entered, all IP addresses will be allowed. You can specify IP masks, such as 192.168.2.*
 * `license.txt` : Enter your floating licenses in this file, one license key per line
 * `users.txt` : If you would like to allow only certain user names, please enter one user name per line. If no user names are entered, all user names will be allowed
@@ -68,6 +74,8 @@ Or use the following minimal command :
 ```bash
 docker run -d -p 11862:11862 --name ejtserver \
   -e TZ="Europe/Paris" \
+  -e EJTSERVER_DL_USERNAME="my_ejt_username" \
+  -e EJTSERVER_DL_PASSWORD="my_ejt_password" \
   -v $(pwd)/data:/data \
   crazymax/ejtserver:latest
 ```
@@ -156,4 +164,5 @@ Any funds donated will be used to help further development on this project! :gif
 
 ## License
 
-MIT. See `LICENSE` for more details.
+MIT. See `LICENSE` for more details.<br />
+And a special thanks to @ingokegel and [ej-technologies'](https://www.ej-technologies.com/)!
