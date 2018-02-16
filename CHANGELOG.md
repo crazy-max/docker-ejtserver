@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.13-RC3 (2018/02/16)
+
+* Licenses are now injected through environment variable `EJTSERVER_LICENSES`
+* Rename some environment variables
+* No need of Supervisor
+
 ## 1.13-RC2 (2018/02/06)
 
 * Username and password required if you use the official base url to download the ejtserver tarball

@@ -19,17 +19,15 @@ ENV EJTSERVER_PATH="/opt/ejtserver" \
   USERNAME="docker" \
   UID=1000 GID=1000
 
-RUN apk --update --no-cache add curl supervisor tar tzdata \
-  && mkdir -p ${EJTSERVER_PATH} \
-  && rm -rf /var/cache/apk/* /tmp/*
-
 ADD entrypoint.sh /entrypoint.sh
-ADD assets /
 
-RUN chmod a+x /entrypoint.sh
+RUN apk --update --no-cache add curl tar tzdata \
+  && mkdir -p ${EJTSERVER_PATH} \
+  && chmod a+x /entrypoint.sh \
+  && rm -rf /var/cache/apk/* /tmp/*
 
 EXPOSE 11862
 VOLUME [ "/data" ]
 
 ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/usr/bin/supervisord", "-c", "/etc/supervisord.conf" ]
+CMD [ "/usr/local/bin/ejtserver", "start-launchd" ]
