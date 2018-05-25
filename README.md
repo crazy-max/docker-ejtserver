@@ -6,7 +6,6 @@
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/stars/crazymax/ejtserver.svg?style=flat-square" alt="Docker Stars"></a>
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/pulls/crazymax/ejtserver.svg?style=flat-square" alt="Docker Pulls"></a>
   <a href="https://quay.io/repository/crazymax/ejtserver"><img src="https://quay.io/repository/crazymax/ejtserver/status?style=flat-square" alt="Docker Repository on Quay"></a>
-  <a href="https://beerpay.io/crazy-max/docker-ejtserver"><img src="https://img.shields.io/beerpay/crazy-max/docker-ejtserver.svg?style=flat-square" alt="Beerpay"></a>
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SD4J26TW97CSU"><img src="https://img.shields.io/badge/donate-paypal-7057ff.svg?style=flat-square" alt="Donate Paypal"></a>
 </p>
 
@@ -164,8 +163,7 @@ All kinds of contributions are welcomed :raised_hands:!<br />
 The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon:<br />
 But we're not gonna lie to each other, I'd rather you buy me a beer or two :beers:!
 
-[![Beerpay](https://beerpay.io/crazy-max/docker-ejtserver/badge.svg?style=beer-square)](https://beerpay.io/crazy-max/docker-ejtserver)
-or [![Paypal](.res/paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SD4J26TW97CSU)
+[![Paypal](.res/paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SD4J26TW97CSU)
 
 ## License
 
