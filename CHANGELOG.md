@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.13-RC4 (2018/07/28)
+
+* Upgrade based image to Alpine Linux 3.8
+* Unset sensitive environment variables
+* Rename `UID / GID` vars to `PUID / PGID` (best practice)
+
 ## 1.13-RC3 (2018/02/16)
 
 * Licenses are now injected through environment variable `EJTSERVER_LICENSES`

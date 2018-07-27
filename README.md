@@ -16,6 +16,7 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 
 ## Features
 
+* Alpine Linux 3.8
 * License server customizable via environment variables
 * Persistence of configuration in a single directory
 * A custom base url can be provided to download the ejtserver tarball
@@ -24,16 +25,18 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 
 ### Environment variables
 
-* `UID` : License server user id (default to `1000`)
-* `GID` : License server group id (default to `1000`)
-* `TZ` : The timezone assigned to the container (default to `UTC`)
-* `EJT_ACCOUNT_USERNAME` : Username of your EJT account to download the license server. Can be empty if you use a custom base url to download the ejtserver tarball without HTTP authentication
-* `EJT_ACCOUNT_PASSWORD` : Password linked to the username
-* `EJTSERVER_VERSION` : EJT License Server version to install. See the [official changelog](https://www.ej-technologies.com/license/changelog.html) for a curated list. (default to `1.13`)
-* `EJTSERVER_DOWNLOAD_BASEURL` : Base url where EJT License Server unix tarball can be downloaded (default to `https://licenseserver.ej-technologies.com`)
-* `EJTSERVER_LICENSES` : Your floating licenses (comma delimited)
-* `EJTSERVER_DISPLAY_HOSTNAMES` : If you want to see host names instead of IP addresses (default to `false`)
-* `EJTSERVER_LOG_LEVEL` : [Log4J log level](https://logging.apache.org/log4j/2.x/manual/customloglevels.html) of the EJT License Server (default to `INFO`)
+| Key                            | Default                                       | Description                               
+|--------------------------------|-----------------------------------------------|-------------------------------------------
+| `TZ`                           | `UTC`                                         | Timezone (e.g. `Europe/Paris`)
+| `PUID`                         | `1000`                                        | License server user id
+| `PGID`                         | `1000`                                        | License server group id
+| `EJT_ACCOUNT_USERNAME`         |                                               | Username of your EJT account to download the license server. Can be empty if you use a custom base url to download the ejtserver tarball without HTTP authentication
+| `EJT_ACCOUNT_PASSWORD`         |                                               | Password linked to the username
+| `EJTSERVER_VERSION`            | `1.13`                                        | EJT License Server version to install. See the [official changelog](https://www.ej-technologies.com/license/changelog.html) for a curated list
+| `EJTSERVER_DOWNLOAD_BASEURL`   | `https://licenseserver.ej-technologies.com`   | Base url where EJT License Server unix tarball can be downloaded
+| `EJTSERVER_LICENSES`           |                                               | Your floating licenses (comma delimited)
+| `EJTSERVER_DISPLAY_HOSTNAMES`  | `false`                                       | If you want to see host names instead of IP addresses
+| `EJTSERVER_LOG_LEVEL`          | `INFO`                                        | [Log4J log level](https://logging.apache.org/log4j/2.x/manual/customloglevels.html) of the EJT License Server
 
 ### Volumes
 
@@ -64,7 +67,7 @@ docker-compose exec ejtserver admin list
 
 ## Usage
 
-Docker compose is the recommended way to run this image. You can use the following [docker compose template](docker-compose.yml), then run the container :
+Docker compose is the recommended way to run this image. You can use the following [docker compose template](examples/compose/docker-compose.yml), then run the container :
 
 ```bash
 docker-compose up -d

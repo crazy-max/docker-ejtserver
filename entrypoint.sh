@@ -1,29 +1,38 @@
 #!/bin/sh
 
 TZ=${TZ:-"UTC"}
-EJTSERVER_VERSION="1.13"
+PUID=${PUID:-1000}
+PGID=${PGID:-1000}
+
+EJTSERVER_VERSION=${EJTSERVER_VERSION:-"1.13"}
 EJTSERVER_DOWNLOAD_BASEURL=${EJTSERVER_DOWNLOAD_BASEURL:-"https://licenseserver.ej-technologies.com"}
+EJTSERVER_DISPLAY_HOSTNAMES=${EJTSERVER_DISPLAY_HOSTNAMES:-"false"}
+EJTSERVER_LOG_LEVEL=${EJTSERVER_LOG_LEVEL:-"INFO"}
+
+EJTSERVER_PATH="/opt/ejtserver"
 EJTSERVER_TARBALL="ejtserver_unix_${EJTSERVER_VERSION//./_}.tar.gz"
 EJTSERVER_DOWNLOAD_URL="${EJTSERVER_DOWNLOAD_BASEURL}/${EJTSERVER_TARBALL}"
 EJTSERVER_ADDRESS="0.0.0.0"
 EJTSERVER_PORT=11862
-EJTSERVER_DISPLAY_HOSTNAMES=${EJTSERVER_DISPLAY_HOSTNAMES:-"false"}
-EJTSERVER_LOG_LEVEL=${EJTSERVER_LOG_LEVEL:-"INFO"}
 
 # Timezone
 echo "Setting timezone to ${TZ}..."
 ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
 echo ${TZ} > /etc/timezone
 
-# Create docker user
-echo "Creating ${USERNAME} user and group (uid=${UID} ; gid=${GID})..."
-addgroup -g ${GID} ${USERNAME}
-adduser -D -s /bin/sh -G ${USERNAME} -u ${UID} ${USERNAME}
+# Change rrdcached UID / GID
+echo "Checking if ejt UID / GID has changed..."
+if [ $(id -u ejt) != ${PUID} ]; then
+  usermod -u ${PUID} ejt
+fi
+if [ $(id -g ejt) != ${PGID} ]; then
+  groupmod -g ${PGID} ejt
+fi
 
 # Init
 echo "Initializing files and folders..."
 mkdir -p /data
-chown -R ${USERNAME}. /data ${EJTSERVER_PATH}
+chown -R ejt. /data ${EJTSERVER_PATH}
 
 # Download ejtserver tarball
 if [ -f "/data/${EJTSERVER_TARBALL}" ]; then
@@ -40,6 +49,8 @@ else
     exit 1
   fi
 fi
+unset EJT_ACCOUNT_USERNAME
+unset EJT_ACCOUNT_PASSWORD
 
 # Install
 echo "Installing ejtserver ${EJTSERVER_VERSION}..."
@@ -89,6 +100,6 @@ EOL
 
 # Fix perms
 echo "Fixing permissions..."
-chown -R ${USERNAME}. /data ${EJTSERVER_PATH}
+chown -R ejt. /data ${EJTSERVER_PATH}
 
 exec "$@"

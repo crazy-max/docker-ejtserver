@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine3.7
+FROM openjdk:8-jre-alpine3.8
 MAINTAINER CrazyMax <crazy-max@users.noreply.github.com>
 
 ARG BUILD_DATE
@@ -15,15 +15,14 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
   org.label-schema.vendor="CrazyMax" \
   org.label-schema.schema-version="1.0"
 
-ENV EJTSERVER_PATH="/opt/ejtserver" \
-  USERNAME="docker" \
-  UID=1000 GID=1000
-
 ADD entrypoint.sh /entrypoint.sh
 
-RUN apk --update --no-cache add curl tar tzdata \
-  && mkdir -p ${EJTSERVER_PATH} \
+RUN apk --update --no-cache add \
+    curl shadow tar tzdata \
+  && mkdir -p /opt/ejtserver \
   && chmod a+x /entrypoint.sh \
+  && addgroup -g 1000 ejt \
+  && adduser -u 1000 -G ejt -h /data -s /sbin/nologin -D ejt \
   && rm -rf /var/cache/apk/* /tmp/*
 
 EXPOSE 11862
