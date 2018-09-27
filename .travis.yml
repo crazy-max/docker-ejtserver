@@ -5,7 +5,7 @@ services:
 
 env:
   global:
-    - VERSION=1.13
+    - VERSION=1.13.1
     - GITHUB_REPO=crazy-max/docker-ejtserver
     - DOCKER_USERNAME=crazymax
     - DOCKER_REPONAME=ejtserver
