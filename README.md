@@ -6,6 +6,7 @@
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/stars/crazymax/ejtserver.svg?style=flat-square" alt="Docker Stars"></a>
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/pulls/crazymax/ejtserver.svg?style=flat-square" alt="Docker Pulls"></a>
   <a href="https://quay.io/repository/crazymax/ejtserver"><img src="https://quay.io/repository/crazymax/ejtserver/status?style=flat-square" alt="Docker Repository on Quay"></a>
+  <a href="https://www.codacy.com/app/crazy-max/docker-ejtserver"><img src="https://img.shields.io/codacy/grade/b805833749d54c89ae0584cda5c6cd4d.svg?style=flat-square" alt="Code Quality"></a>
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SD4J26TW97CSU"><img src="https://img.shields.io/badge/donate-paypal-7057ff.svg?style=flat-square" alt="Donate Paypal"></a>
 </p>
 
