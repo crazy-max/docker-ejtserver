@@ -4,10 +4,10 @@ TZ=${TZ:-"UTC"}
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 
-EJTSERVER_VERSION=${EJTSERVER_VERSION:-"1.13.1"}
-EJTSERVER_DOWNLOAD_BASEURL=${EJTSERVER_DOWNLOAD_BASEURL:-"https://licenseserver.ej-technologies.com"}
-EJTSERVER_DISPLAY_HOSTNAMES=${EJTSERVER_DISPLAY_HOSTNAMES:-"false"}
-EJTSERVER_LOG_LEVEL=${EJTSERVER_LOG_LEVEL:-"INFO"}
+EJTSERVER_VERSION=${EJTSERVER_VERSION:-1.13.1}
+EJTSERVER_DOWNLOAD_BASEURL=${EJTSERVER_DOWNLOAD_BASEURL:-https://licenseserver.ej-technologies.com}
+EJTSERVER_DISPLAY_HOSTNAMES=${EJTSERVER_DISPLAY_HOSTNAMES:-false}
+EJTSERVER_LOG_LEVEL=${EJTSERVER_LOG_LEVEL:-INFO}
 
 EJTSERVER_PATH="/opt/ejtserver"
 EJTSERVER_TARBALL="ejtserver_unix_${EJTSERVER_VERSION//./_}.tar.gz"
@@ -80,6 +80,7 @@ echo "Inserting licenses..."
 for EJTSERVER_LICENSE in $(echo ${EJTSERVER_LICENSES} | tr "," "\n"); do
   echo "${EJTSERVER_LICENSE}" >> ${EJTSERVER_PATH}/license.txt
 done
+unset EJTSERVER_LICENSES
 
 # Configure
 echo "Configuring license server..."
@@ -90,7 +91,7 @@ cat > ${EJTSERVER_PATH}/bin/ejtserver.vmoptions <<EOL
 EOL
 
 # Log level
-echo "Setting log level of license server to $LOG_LEVEL..."
+echo "Setting log level of license server to $EJTSERVER_LOG_LEVEL..."
 cat > ${EJTSERVER_PATH}/log4j.properties <<EOL
 log4j.rootLogger=${EJTSERVER_LOG_LEVEL}, stdout
 log4j.appender.stdout=org.apache.log4j.ConsoleAppender

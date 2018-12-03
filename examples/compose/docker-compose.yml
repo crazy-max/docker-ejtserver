@@ -5,15 +5,6 @@ services:
     image: crazymax/ejtserver:latest
     volumes:
       - "./data:/data"
-    environment:
-      - "TZ=Europe/Paris"
-      - "PUID=1000"
-      - "PGID=1000"
-      - "EJT_ACCOUNT_USERNAME=my_ejt_username"
-      - "EJT_ACCOUNT_PASSWORD=my_ejt_password"
-      - "EJTSERVER_VERSION=1.13.1"
-      - "EJTSERVER_DOWNLOAD_BASEURL=https://licenseserver.ej-technologies.com"
-      - "EJTSERVER_LICENSES=0-0123-0123456789"
-      - "EJTSERVER_DISPLAY_HOSTNAMES=false"
-      - "EJTSERVER_LOG_LEVEL=INFO"
+    env_file:
+      - "./ejtserver.env"
     restart: always
