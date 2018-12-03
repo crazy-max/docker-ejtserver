@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TZ=${TZ:-"UTC"}
+TZ=${TZ:-UTC}
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 

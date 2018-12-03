@@ -17,11 +17,11 @@ QUAY_LOGIN=${QUAY_LOGIN:="crazymax"}
 QUAY_REPONAME=${QUAY_REPONAME:="ejtserver"}
 
 # Check local or travis
-BRANCH=${TRAVIS_BRANCH:-"local"}
+BRANCH=${TRAVIS_BRANCH:-local}
 if [[ ${TRAVIS_PULL_REQUEST} == "true" ]]; then
   BRANCH=${TRAVIS_PULL_REQUEST_BRANCH}
 fi
-DOCKER_TAG=${BRANCH:-"local"}
+DOCKER_TAG=${BRANCH:-local}
 if [[ "$BRANCH" == "master" ]]; then
   DOCKER_TAG=latest
 elif [[ "$BRANCH" == "local" ]]; then
