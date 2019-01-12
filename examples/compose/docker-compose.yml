@@ -3,6 +3,7 @@ version: "3.2"
 services:
   ejtserver:
     image: crazymax/ejtserver:latest
+    container_name: ejtserver
     volumes:
       - "./data:/data"
     env_file:
