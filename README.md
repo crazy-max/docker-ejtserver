@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://microbadger.com/images/crazymax/ejtserver"><img src="https://images.microbadger.com/badges/version/crazymax/ejtserver.svg?style=flat-square" alt="Version"></a>
-  <a href="https://travis-ci.org/crazy-max/docker-ejtserver"><img src="https://img.shields.io/travis/crazy-max/docker-ejtserver/master.svg?style=flat-square" alt="Build Status"></a>
+  <a href="https://travis-ci.com/crazy-max/docker-ejtserver"><img src="https://img.shields.io/travis/com/crazy-max/docker-ejtserver/master.svg?style=flat-square" alt="Build Status"></a>
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/stars/crazymax/ejtserver.svg?style=flat-square" alt="Docker Stars"></a>
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/pulls/crazymax/ejtserver.svg?style=flat-square" alt="Docker Pulls"></a>
   <a href="https://quay.io/repository/crazymax/ejtserver"><img src="https://quay.io/repository/crazymax/ejtserver/status?style=flat-square" alt="Docker Repository on Quay"></a>
