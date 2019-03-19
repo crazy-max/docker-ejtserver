@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine3.8
+FROM openjdk:8-jre-alpine3.9
 
 ARG BUILD_DATE
 ARG VCS_REF

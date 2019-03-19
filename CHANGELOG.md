@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.13.1-RC2 (2019/03/20)
+
+* Upgrade based image to Alpine Linux 3.9
+
 ## 1.13.1-RC1 (2018/09/27)
 
 * Upgrade to default version 1.13.1
