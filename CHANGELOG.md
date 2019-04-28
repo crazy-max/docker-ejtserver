@@ -2,16 +2,16 @@
 
 ## 1.13.1-RC2 (2019/03/20)
 
-* Upgrade based image to Alpine Linux 3.9
+* Alpine Linux 3.9
 
 ## 1.13.1-RC1 (2018/09/27)
 
-* Upgrade to default version 1.13.1
+* EJT License Server 1.13.1
 * Dockerfile maintainer deprecated
 
 ## 1.13-RC4 (2018/07/28)
 
-* Upgrade based image to Alpine Linux 3.8
+* Alpine Linux 3.8
 * Unset sensitive environment variables
 * Rename `UID / GID` vars to `PUID / PGID` (best practice)
 
