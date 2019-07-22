@@ -17,7 +17,6 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 
 ## Features
 
-* Alpine Linux 3.9
 * License server customizable via environment variables
 * Persistence of configuration in a single directory
 * A custom base url can be provided to download the ejtserver tarball

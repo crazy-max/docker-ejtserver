@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.13.1-RC3 (2019/07/22)
+
+* OpenJDK JRE 12
+* Alpine Linux 3.10
+
 ## 1.13.1-RC2 (2019/03/20)
 
 * Alpine Linux 3.9

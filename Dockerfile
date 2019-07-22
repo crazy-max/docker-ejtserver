@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine3.9
+FROM adoptopenjdk/openjdk12:alpine-jre
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -18,7 +18,10 @@ LABEL maintainer="CrazyMax" \
 COPY entrypoint.sh /entrypoint.sh
 
 RUN apk --update --no-cache add \
-    curl shadow tar tzdata \
+    curl \
+    shadow \
+    tar \
+    tzdata \
   && mkdir -p /opt/ejtserver \
   && chmod a+x /entrypoint.sh \
   && addgroup -g 1000 ejt \
