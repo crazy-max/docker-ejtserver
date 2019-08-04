@@ -33,3 +33,6 @@ VOLUME [ "/data" ]
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/usr/local/bin/ejtserver", "start-launchd" ]
+
+HEALTHCHECK --interval=10s --timeout=5s \
+  CMD ejtserver status

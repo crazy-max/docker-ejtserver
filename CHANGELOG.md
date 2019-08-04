@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.13.1-RC4 (2019/08/04)
+
+* Add healthcheck
+
 ## 1.13.1-RC3 (2019/07/22)
 
 * OpenJDK JRE 12
