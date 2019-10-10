@@ -12,7 +12,7 @@
 
 ## About
 
-🐳 [EJT License Server](https://www.ej-technologies.com/license/files) Docker image based on Alpine Linux.<br />
+🐳 [EJT License Server](https://www.ej-technologies.com/license/files) Docker image based on AdoptOpenJDK.<br />
 If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 🐳 Docker images!
 
 💡 Want to be notified of new releases? Check out 🔔 [Diun (Docker Image Update Notifier)](https://github.com/crazy-max/diun) project!
