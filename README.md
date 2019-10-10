@@ -1,11 +1,10 @@
 <p align="center"><a href="https://github.com/crazy-max/docker-ejtserver" target="_blank"><img height="128"src="https://raw.githubusercontent.com/crazy-max/docker-ejtserver/master/.res/docker-ejtserver.jpg"></a></p>
 
 <p align="center">
-  <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/badge/dynamic/json.svg?label=version&query=$.results[1].name&url=https://hub.docker.com/v2/repositories/crazymax/ejtserver/tags&style=flat-square" alt="Latest Version"></a>
-  <a href="https://travis-ci.com/crazy-max/docker-ejtserver"><img src="https://img.shields.io/travis/com/crazy-max/docker-ejtserver/master.svg?style=flat-square" alt="Build Status"></a>
+  <a href="https://hub.docker.com/r/crazymax/ejtserver/tags?page=1&ordering=last_updated"><img src="https://img.shields.io/github/v/tag/crazy-max/docker-ejtserver?label=version&style=flat-square" alt="Latest Version"></a>
+  <a href="https://github.com/crazy-max/docker-ejtserver/actions?workflow=build"><img src="https://github.com/crazy-max/docker-ejtserver/workflows/build/badge.svg" alt="Build Status"></a>
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/stars/crazymax/ejtserver.svg?style=flat-square" alt="Docker Stars"></a>
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/pulls/crazymax/ejtserver.svg?style=flat-square" alt="Docker Pulls"></a>
-  <a href="https://quay.io/repository/crazymax/ejtserver"><img src="https://quay.io/repository/crazymax/ejtserver/status?style=flat-square" alt="Docker Repository on Quay"></a>
   <a href="https://www.codacy.com/app/crazy-max/docker-ejtserver"><img src="https://img.shields.io/codacy/grade/b805833749d54c89ae0584cda5c6cd4d.svg?style=flat-square" alt="Code Quality"></a>
   <br /><a href="https://www.patreon.com/crazymax"><img src="https://img.shields.io/badge/donate-patreon-f96854.svg?logo=patreon&style=flat-square" alt="Support me on Patreon"></a>
   <a href="https://www.paypal.me/crazyws"><img src="https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square" alt="Donate Paypal"></a>
@@ -26,11 +25,24 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 
 ## Docker
 
+### Multi-platform image
+
+Following platforms for this image are available:
+
+```
+$ docker run --rm mplatform/mquery crazymax/ejtserver:latest
+Image: crazymax/ejtserver:latest
+ * Manifest List: Yes
+ * Supported platforms:
+   - linux/amd64
+   - linux/arm64
+   - linux/ppc64le
+   - linux/s390x
+```
+
 ### Environment variables
 
 * `TZ` : The timezone assigned to the container (default `UTC`)
-* `PUID` : License server user id (default `1000`)
-* `PGID` : License server group id (default `1000`)
 * `EJT_ACCOUNT_USERNAME` : Username of your EJT account to download the license server. Can be empty if you use a custom base url to download the ejtserver tarball without HTTP authentication
 * `EJT_ACCOUNT_PASSWORD` : Password linked to the username
 * `EJTSERVER_VERSION` : EJT License Server version to install. See the [official changelog](https://www.ej-technologies.com/license/changelog.html) for a curated list. (default `1.13.1`)
@@ -48,6 +60,8 @@ In this folder you will find those files :
 * `ejtserver_unix_*.tar.gz` : The downloaded EJT License Server unix tarball
 * `ip.txt` : If you would like to allow only certain IP addresses, enter one IP address per line. If no IP addresses are entered, all IP addresses will be allowed. You can specify IP masks, such as 192.168.2.*
 * `users.txt` : If you would like to allow only certain user names, please enter one user name per line. If no user names are entered, all user names will be allowed
+
+> :warning: Note that the volume should be owned by uid `1000` and gid `1000`. If you don't give the volume correct permissions, the container may not start.
 
 ### Ports
 
