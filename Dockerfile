@@ -30,11 +30,13 @@ RUN apt-get update \
   && chown -R ejt. /data /opt/ejtserver \
   && ln -sf /opt/ejtserver/bin/admin /usr/local/bin/admin \
   && ln -sf /opt/ejtserver/bin/ejtserver /usr/local/bin/ejtserver \
-  && rm -rf /var/cache/apk/* /tmp/*
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 USER ejt
 
 EXPOSE 11862
+WORKDIR /data
 VOLUME [ "/data" ]
 
 ENTRYPOINT [ "/entrypoint.sh" ]
