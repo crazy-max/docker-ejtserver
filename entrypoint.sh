@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 EJTSERVER_VERSION=${EJTSERVER_VERSION:-1.13.1}
 EJTSERVER_DOWNLOAD_BASEURL=${EJTSERVER_DOWNLOAD_BASEURL:-https://licenseserver.ej-technologies.com}
