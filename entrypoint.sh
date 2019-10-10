@@ -1,9 +1,5 @@
 #!/bin/sh
 
-TZ=${TZ:-UTC}
-PUID=${PUID:-1000}
-PGID=${PGID:-1000}
-
 EJTSERVER_VERSION=${EJTSERVER_VERSION:-1.13.1}
 EJTSERVER_DOWNLOAD_BASEURL=${EJTSERVER_DOWNLOAD_BASEURL:-https://licenseserver.ej-technologies.com}
 EJTSERVER_DISPLAY_HOSTNAMES=${EJTSERVER_DISPLAY_HOSTNAMES:-false}
@@ -14,25 +10,6 @@ EJTSERVER_TARBALL="ejtserver_unix_${EJTSERVER_VERSION//./_}.tar.gz"
 EJTSERVER_DOWNLOAD_URL="${EJTSERVER_DOWNLOAD_BASEURL}/${EJTSERVER_TARBALL}"
 EJTSERVER_ADDRESS="0.0.0.0"
 EJTSERVER_PORT=11862
-
-# Timezone
-echo "Setting timezone to ${TZ}..."
-ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
-echo ${TZ} > /etc/timezone
-
-# Change ejt UID / GID
-echo "Checking if ejt UID / GID has changed..."
-if [ $(id -u ejt) != ${PUID} ]; then
-  usermod -u ${PUID} ejt
-fi
-if [ $(id -g ejt) != ${PGID} ]; then
-  groupmod -g ${PGID} ejt
-fi
-
-# Init
-echo "Initializing files and folders..."
-mkdir -p /data
-chown -R ejt. /data ${EJTSERVER_PATH}
 
 # Download ejtserver tarball
 if [ -f "/data/${EJTSERVER_TARBALL}" ]; then
@@ -57,8 +34,6 @@ echo "Installing ejtserver ${EJTSERVER_VERSION}..."
 rm -rf ${EJTSERVER_PATH}/*
 tar -xzf "/data/${EJTSERVER_TARBALL}" --strip 1 -C ${EJTSERVER_PATH}
 chmod a+x ${EJTSERVER_PATH}/bin/admin ${EJTSERVER_PATH}/bin/ejtserver*
-ln -sf "$EJTSERVER_PATH/bin/admin" "/usr/local/bin/admin"
-ln -sf "$EJTSERVER_PATH/bin/ejtserver" "/usr/local/bin/ejtserver"
 rm -f ${EJTSERVER_PATH}/*.txt
 
 # Init ejtserver
@@ -98,9 +73,5 @@ log4j.appender.stdout=org.apache.log4j.ConsoleAppender
 log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
 log4j.appender.stdout.layout.ConversionPattern=[%p] - %d{ISO8601} - %m%n
 EOL
-
-# Fix perms
-echo "Fixing permissions..."
-chown -R ejt. /data ${EJTSERVER_PATH}
 
 exec "$@"
