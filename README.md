@@ -19,6 +19,8 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 
 ## Features
 
+* Run as non-root user
+* Multi-platform image
 * License server customizable via environment variables
 * Persistence of configuration in a single directory
 * A custom base url can be provided to download the ejtserver tarball
