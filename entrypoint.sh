@@ -11,6 +11,29 @@ EJTSERVER_DOWNLOAD_URL="${EJTSERVER_DOWNLOAD_BASEURL}/${EJTSERVER_TARBALL}"
 EJTSERVER_ADDRESS="0.0.0.0"
 EJTSERVER_PORT=11862
 
+# From https://github.com/docker-library/mariadb/blob/master/docker-entrypoint.sh#L21-L41
+# usage: file_env VAR [DEFAULT]
+#    ie: file_env 'XYZ_DB_PASSWORD' 'example'
+# (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
+#  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
+file_env() {
+  local var="$1"
+  local fileVar="${var}_FILE"
+  local def="${2:-}"
+  if [ "${!var:-}" ] && [ "${!fileVar:-}" ]; then
+    echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
+    exit 1
+  fi
+  local val="$def"
+  if [ "${!var:-}" ]; then
+    val="${!var}"
+  elif [ "${!fileVar:-}" ]; then
+    val="$(< "${!fileVar}")"
+  fi
+  export "$var"="$val"
+  unset "$fileVar"
+}
+
 if [ -n "${PGID}" ] && [ "${PGID}" != "$(id -g ejt)" ]; then
   echo "Switching to PGID ${PGID}..."
   sed -i -e "s/^ejt:\([^:]*\):[0-9]*/ejt:\1:${PGID}/" /etc/group
@@ -22,6 +45,8 @@ if [ -n "${PUID}" ] && [ "${PUID}" != "$(id -u ejt)" ]; then
 fi
 
 # Download ejtserver tarball
+file_env 'EJT_ACCOUNT_USERNAME'
+file_env 'EJT_ACCOUNT_PASSWORD'
 if [ -f "/data/${EJTSERVER_TARBALL}" ]; then
   echo "ejtserver already downloaded in /data/${EJTSERVER_TARBALL}. Skipping download..."
 else
@@ -61,6 +86,7 @@ fi
 
 # Insert licenses
 echo "Inserting licenses..."
+file_env 'EJTSERVER_LICENSES'
 > ${EJTSERVER_PATH}/license.txt
 for EJTSERVER_LICENSE in $(echo ${EJTSERVER_LICENSES} | tr "," "\n"); do
   echo "${EJTSERVER_LICENSE}" >> ${EJTSERVER_PATH}/license.txt

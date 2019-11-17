@@ -3,6 +3,7 @@
 ## 1.13.1-RC6 (2019/11/17)
 
 * Allow to set custom `PUID`/`PGID`
+* Allow to use Docker secrets for `EJT_ACCOUNT_USERNAME`, `EJT_ACCOUNT_PASSWORD` and `EJTSERVER_LICENSES`
 
 ## 1.13.1-RC5 (2019/10/10)
 
