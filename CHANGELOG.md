@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.13.1-RC6 (2019/11/17)
+
+* Allow to set custom `PUID`/`PGID`
+
 ## 1.13.1-RC5 (2019/10/10)
 
 * Multi-platform Docker image

@@ -11,6 +11,16 @@ EJTSERVER_DOWNLOAD_URL="${EJTSERVER_DOWNLOAD_BASEURL}/${EJTSERVER_TARBALL}"
 EJTSERVER_ADDRESS="0.0.0.0"
 EJTSERVER_PORT=11862
 
+if [ -n "${PGID}" ] && [ "${PGID}" != "$(id -g ejt)" ]; then
+  echo "Switching to PGID ${PGID}..."
+  sed -i -e "s/^ejt:\([^:]*\):[0-9]*/ejt:\1:${PGID}/" /etc/group
+  sed -i -e "s/^ejt:\([^:]*\):\([0-9]*\):[0-9]*/ejt:\1:\2:${PGID}/" /etc/passwd
+fi
+if [ -n "${PUID}" ] && [ "${PUID}" != "$(id -u ejt)" ]; then
+  echo "Switching to PUID ${PUID}..."
+  sed -i -e "s/^ejt:\([^:]*\):[0-9]*:\([0-9]*\)/ejt:\1:${PUID}:\2/" /etc/passwd
+fi
+
 # Download ejtserver tarball
 if [ -f "/data/${EJTSERVER_TARBALL}" ]; then
   echo "ejtserver already downloaded in /data/${EJTSERVER_TARBALL}. Skipping download..."
@@ -74,4 +84,7 @@ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
 log4j.appender.stdout.layout.ConversionPattern=[%p] - %d{ISO8601} - %m%n
 EOL
 
-exec "$@"
+echo "Fixing perms..."
+chown -R ejt:ejt /data "${EJTSERVER_PATH}"
+
+exec su-exec ejt:ejt "$@"
