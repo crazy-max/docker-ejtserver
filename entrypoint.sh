@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TZ=${TZ:-UTC}
+
 EJTSERVER_VERSION=${EJTSERVER_VERSION:-1.13.1}
 EJTSERVER_DOWNLOAD_BASEURL=${EJTSERVER_DOWNLOAD_BASEURL:-https://licenseserver.ej-technologies.com}
 EJTSERVER_DISPLAY_HOSTNAMES=${EJTSERVER_DISPLAY_HOSTNAMES:-false}
@@ -43,6 +45,11 @@ if [ -n "${PUID}" ] && [ "${PUID}" != "$(id -u ejt)" ]; then
   echo "Switching to PUID ${PUID}..."
   sed -i -e "s/^ejt:\([^:]*\):[0-9]*:\([0-9]*\)/ejt:\1:${PUID}:\2/" /etc/passwd
 fi
+
+# Timezone
+echo "Setting timezone to ${TZ}..."
+ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
+echo ${TZ} > /etc/timezone
 
 # Download ejtserver tarball
 file_env 'EJT_ACCOUNT_USERNAME'
