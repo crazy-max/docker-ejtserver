@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.13.1-RC8 (2020/05/06)
+
+* Switch to Open Container Specification labels as label-schema.org ones are deprecated
+
 ## 1.13.1-RC7 (2019/12/07)
 
 * Fix timezone
