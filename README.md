@@ -55,6 +55,8 @@ Image: crazymax/ejtserver:latest
 * `EJTSERVER_DISPLAY_HOSTNAMES`: If you want to see host names instead of IP addresses (default `false`)
 * `EJTSERVER_LOG_LEVEL`: [Log4J log level](https://logging.apache.org/log4j/2.x/manual/customloglevels.html) of the EJT License Server (default `INFO`)
 
+> 💡 `EJT_ACCOUNT_USERNAME_FILE`, `EJT_ACCOUNT_PASSWORD_FILE` and `EJTSERVER_LICENSES_FILE` can be used to fill in the value from a file, especially for Docker's secrets feature.
+
 ### Volumes
 
 * `/data`: Contains configuration and the downloaded EJT License Server unix tarball
