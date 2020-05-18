@@ -17,6 +17,25 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 
 💡 Want to be notified of new releases? Check out 🔔 [Diun (Docker Image Update Notifier)](https://github.com/crazy-max/diun) project!
 
+___
+
+* [Features](#features)
+* [Docker](#docker)
+  * [Multi-platform image](#multi-platform-image)
+  * [Environment variables](#environment-variables)
+  * [Volumes](#volumes)
+  * [Ports](#ports)
+  * [Commands](#commands)
+* [Usage](#usage)
+  * [Docker Compose](#docker-compose)
+  * [Command line](#command-line)
+* [Upgrade](#upgrade)
+* [Notes](#notes)
+  * [How to use your floating license?](#how-to-use-your-floating-license)
+  * [User groups](#user-groups)
+* [How can I help?](#how-can-i-help)
+* [License](#license)
+
 ## Features
 
 * Run as non-root user
@@ -88,14 +107,18 @@ docker-compose exec ejtserver admin list
 
 ## Usage
 
-Docker compose is the recommended way to run this image. You can use the following [docker compose template](examples/compose/docker-compose.yml), then run the container:
+### Docker Compose
+
+Docker compose is the recommended way to run this image. Copy the content of folder [examples/compose](examples/compose) in `/var/ejtserver/` on your host for example. Edit the compose and env files with your preferences and run the following commands:
 
 ```bash
 docker-compose up -d
 docker-compose logs -f
 ```
 
-Or use the following minimal command:
+### Command line
+
+You can also use the following minimal command :
 
 ```bash
 docker run -d -p 11862:11862 --name ejtserver \
@@ -107,7 +130,7 @@ docker run -d -p 11862:11862 --name ejtserver \
   crazymax/ejtserver:latest
 ```
 
-## Update
+## Upgrade
 
 Recreate the container whenever I push an update:
 
@@ -118,7 +141,7 @@ docker-compose up -d
 
 ## Notes
 
-### How to use your floating license ?
+### How to use your floating license?
 
 [ej-technologies'](https://www.ej-technologies.com/) products offer a floating license mode in the license dialog. Choose `Help -> Enter License Key` from the main menu in the JProfiler GUI or the install4j IDE and select the <b>Floating license</b> radio button.
 
@@ -181,7 +204,7 @@ Alternatively, the `ip.txt` file could define groups as:
 
 Group names are shown in the log file next to the user name.
 
-## How can I help ?
+## How can I help?
 
 All kinds of contributions are welcome :raised_hands:! The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon: You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) :clap: or by making a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely! :rocket:
 
