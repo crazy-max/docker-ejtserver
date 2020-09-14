@@ -4,6 +4,8 @@ services:
   ejtserver:
     image: crazymax/ejtserver:latest
     container_name: ejtserver
+    ports:
+      - "11862:11862"
     volumes:
       - "./data:/data"
     env_file:
