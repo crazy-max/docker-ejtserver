@@ -20,7 +20,7 @@ ___
 
 * [Features](#features)
 * [Docker](#docker)
-  * [Multi-platform image](#multi-platform-image)
+  * [Image](#image)
   * [Environment variables](#environment-variables)
   * [Volumes](#volumes)
   * [Ports](#ports)
@@ -45,7 +45,12 @@ ___
 
 ## Docker
 
-### Multi-platform image
+### Image
+
+| Registry                                                                                         | Image                           |
+|--------------------------------------------------------------------------------------------------|---------------------------------|
+| [Docker Hub](https://hub.docker.com/r/crazymax/ejtserver/)                                            | `crazymax/ejtserver`                 |
+| [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/ejtserver)  | `ghcr.io/crazy-max/ejtserver`        |
 
 Following platforms for this image are available:
 
