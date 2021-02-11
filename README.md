@@ -19,6 +19,7 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 ___
 
 * [Features](#features)
+* [Build locally](#build-locally)
 * [Image](#image)
 * [Environment variables](#environment-variables)
 * [Volumes](#volumes)
@@ -41,6 +42,19 @@ ___
 * License server customizable via environment variables
 * Persistence of configuration in a single directory
 * A custom base url can be provided to download the ejtserver tarball
+
+## Build locally
+
+```shell
+git clone https://github.com/crazy-max/docker-ejtserver.git
+cd docker-ejtserver
+
+# Build image and output to docker (default)
+docker buildx bake
+
+# Build multi-platform image
+docker buildx bake image-all
+```
 
 ## Image
 
@@ -110,7 +124,9 @@ docker-compose exec ejtserver admin list
 
 ### Docker Compose
 
-Docker compose is the recommended way to run this image. Copy the content of folder [examples/compose](examples/compose) in `/var/ejtserver/` on your host for example. Edit the compose and env files with your preferences and run the following commands:
+Docker compose is the recommended way to run this image. Copy the content of folder
+[examples/compose](examples/compose) in `/var/ejtserver/` on your host for example. Edit the compose and env files with
+your preferences and run the following commands:
 
 ```bash
 docker-compose up -d
@@ -119,7 +135,7 @@ docker-compose logs -f
 
 ### Command line
 
-You can also use the following minimal command :
+You can also use the following minimal command:
 
 ```bash
 docker run -d -p 11862:11862 --name ejtserver \
@@ -144,33 +160,44 @@ docker-compose up -d
 
 ### How to use your floating license?
 
-[ej-technologies'](https://www.ej-technologies.com/) products offer a floating license mode in the license dialog. Choose `Help -> Enter License Key` from the main menu in the JProfiler GUI or the install4j IDE and select the <b>Floating license</b> radio button.
+[ej-technologies'](https://www.ej-technologies.com/) products offer a floating license mode in the license dialog.
+Choose `Help -> Enter License Key` from the main menu in the JProfiler GUI or the install4j IDE and select
+the **Floating license** radio button.
 
-The "Name" and "Company" fields are informational only, unless you choose to restrict the allowed values for the "Name" field as described in README.TXT. In the license server field you have to enter the hostname of the computer where the license server is running. Instead of a host name, an IP address can also be used.
+The "Name" and "Company" fields are informational only, unless you choose to restrict the allowed values for the
+"Name" field as described in README.TXT. In the license server field you have to enter the hostname of the computer
+where the license server is running. Instead of a host name, an IP address can also be used.
 
-If have a floating license for a certain major version of a product, you can use older versions of the same product with that floating license as well.
+If have a floating license for a certain major version of a product, you can use older versions of the same product
+with that floating license as well.
 
-Should you require any additional assistance, please contact *support@ej-technologies.com*
+Should you require any additional assistance, please contact **support@ej-technologies.com**
 
 ### User groups
 
-If you want to partition keys to different groups of users, you can define groups in the file `license.txt` and the access control files `users.txt` and `ip.txt` by inserting group headers:
+If you want to partition keys to different groups of users, you can define groups in the file `license.txt` and the
+access control files `users.txt` and `ip.txt` by inserting group headers:
 
 ```
    [group]
 ```
 
-All entries after a group header belong to that group until a new group is started. If no group has been started, entries are added to the "default" group.
+All entries after a group header belong to that group until a new group is started. If no group has been started,
+entries are added to the "default" group.
 
-Users are assigned to a group based on the defined groups in the access control files. If users are defined in users.txt, the group is determined by the that file. If the resulting group is the default group, the `ip.txt` file will be used for determining the associated group. If the users.txt file is empty, only the ip.txt file will be used.
+Users are assigned to a group based on the defined groups in the access control files. If users are defined in
+`users.txt`, the group is determined by the that file. If the resulting group is the default group, the `ip.txt` file
+will be used for determining the associated group. If the users.txt file is empty, only the ip.txt file will be used.
 
-In order to partition a single key to different groups in the `license.txt` file, add the key to multiple groups with the following syntax:
+In order to partition a single key to different groups in the `license.txt` file, add the key to multiple groups
+with the following syntax:
 
 ```
    n:key
 ```
 
-where n is the number of concurrent users that should be assigned to the current group. Use different values of n in different groups that add up to the maximum number of current users for the key. For example:
+where n is the number of concurrent users that should be assigned to the current group. Use different values of n
+in different groups that add up to the maximum number of current users for the key. For example:
 
 ```
 [groupA]
@@ -179,7 +206,8 @@ where n is the number of concurrent users that should be assigned to the current
 6:F-95-10-xxx
 ```
 
-splits the 10-user key F-95-10-xxx into 4 concurrent users for `[groupA]` and 6 concurrent users for `[groupB]`. In `users.txt`, the groups would be defined as:
+splits the 10-user key F-95-10-xxx into 4 concurrent users for `[groupA]` and 6 concurrent users for `[groupB]`.
+In `users.txt`, the groups would be defined as:
 
 ```
 [groupA]
@@ -207,7 +235,10 @@ Group names are shown in the log file next to the user name.
 
 ## How can I help?
 
-All kinds of contributions are welcome :raised_hands:! The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon: You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) :clap: or by making a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely! :rocket:
+All kinds of contributions are welcome :raised_hands:! The most basic way to show your support is to star :star2:
+the project, or to raise issues :speech_balloon: You can also support this project by
+[**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) :clap: or by making a
+[Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely! :rocket:
 
 Thanks again for your support, it is much appreciated! :pray:
 

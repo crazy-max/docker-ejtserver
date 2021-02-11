@@ -6,11 +6,6 @@ on:
       - 'master'
     paths-ignore:
       - '**.md'
-  pull_request:
-    branches:
-      - 'master'
-    paths-ignore:
-      - '**.md'
 
 jobs:
   test:
@@ -35,24 +30,19 @@ jobs:
         uses: docker/setup-buildx-action@v1
       -
         name: Build
-        uses: docker/build-push-action@v2
+        uses: crazy-max/ghaction-docker-buildx-bake@v1
         with:
-          context: .
-          file: ./Dockerfile
-          load: true
-          tags: ${{ steps.prep.outputs.build_tag }}
+          targets: image-local
+        env:
+          DEFAULT_TAG: ${{ steps.prep.outputs.build_tag }}
       -
         name: Start container
-        env:
-          EJT_ACCOUNT_USERNAME: ${{ secrets.EJT_ACCOUNT_USERNAME }}
-          EJT_ACCOUNT_PASSWORD: ${{ secrets.EJT_ACCOUNT_PASSWORD }}
-          EJTSERVER_LICENSES: ${{ secrets.EJTSERVER_LICENSES }}
         run: |
           docker rm -f ${{ steps.prep.outputs.container_name }} > /dev/null 2>&1 || true
           docker run -d --name ${{ steps.prep.outputs.container_name }} \
-            -e "EJT_ACCOUNT_USERNAME=${EJT_ACCOUNT_USERNAME}" \
-            -e "EJT_ACCOUNT_PASSWORD=${EJT_ACCOUNT_PASSWORD}" \
-            -e "EJTSERVER_LICENSES=${EJTSERVER_LICENSES}" \
+            -e "EJT_ACCOUNT_USERNAME=${{ secrets.EJT_ACCOUNT_USERNAME }}" \
+            -e "EJT_ACCOUNT_PASSWORD=${{ secrets.EJT_ACCOUNT_PASSWORD }}" \
+            -e "EJTSERVER_LICENSES=${{ secrets.EJTSERVER_LICENSES }}" \
             ${{ steps.prep.outputs.build_tag }}
       -
         name: Test run
@@ -66,7 +56,6 @@ jobs:
             fi
             if [[ $SECONDS -gt ${TIMEOUT} ]]; then
               >&2 echo "❌ Failed to run ${{ steps.prep.outputs.container_name }} container"
-              docker rm -f ${{ steps.prep.outputs.container_name }} > /dev/null 2>&1 || true
               exit 1
             fi
           done < <(docker logs -f ${{ steps.prep.outputs.container_name }} 2>&1)
@@ -74,8 +63,11 @@ jobs:
           CONTAINER_STATUS=$(docker container inspect --format "{{.State.Status}}" ${{ steps.prep.outputs.container_name }})
           if [[ ${CONTAINER_STATUS} != "running" ]]; then
             >&2 echo "❌ Container ${{ steps.prep.outputs.container_name }} returned status '$CONTAINER_STATUS'"
-            docker rm -f ${{ steps.prep.outputs.container_name }} > /dev/null 2>&1 || true
             exit 1
           fi
+      -
+        name: Container logs
+        if: always()
+        run: |
+          docker logs ${{ steps.prep.outputs.container_name }}
           docker rm -f ${{ steps.prep.outputs.container_name }} > /dev/null 2>&1 || true
-          echo

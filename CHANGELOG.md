@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.13.2-r0 (2021/02/11)
+
+* EJT License Server 1.13.2
+* Switch to buildx bake
+
 ## 1.13.1-RC8 (2020/05/06)
 
 * Switch to Open Container Specification labels as label-schema.org ones are deprecated

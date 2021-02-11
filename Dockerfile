@@ -1,6 +1,4 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} adoptopenjdk:12-jre-hotspot as suexec
-ARG TARGETPLATFORM
-ARG BUILDPLATFORM
 
 RUN  apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -11,6 +9,7 @@ RUN  apt-get update \
   && chown root:root /usr/local/bin/su-exec \
   && chmod 0755 /usr/local/bin/su-exec
 
+ARG TARGETPLATFORM
 FROM --platform=${TARGETPLATFORM:-linux/amd64} adoptopenjdk:12-jre-hotspot
 
 LABEL maintainer="CrazyMax"
