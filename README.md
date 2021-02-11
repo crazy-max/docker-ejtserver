@@ -19,12 +19,11 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 ___
 
 * [Features](#features)
-* [Docker](#docker)
-  * [Image](#image)
-  * [Environment variables](#environment-variables)
-  * [Volumes](#volumes)
-  * [Ports](#ports)
-  * [Commands](#commands)
+* [Image](#image)
+* [Environment variables](#environment-variables)
+* [Volumes](#volumes)
+* [Ports](#ports)
+* [Commands](#commands)
 * [Usage](#usage)
   * [Docker Compose](#docker-compose)
   * [Command line](#command-line)
@@ -43,9 +42,7 @@ ___
 * Persistence of configuration in a single directory
 * A custom base url can be provided to download the ejtserver tarball
 
-## Docker
-
-### Image
+## Image
 
 | Registry                                                                                         | Image                           |
 |--------------------------------------------------------------------------------------------------|---------------------------------|
@@ -65,14 +62,14 @@ Image: crazymax/ejtserver:latest
    - linux/s390x
 ```
 
-### Environment variables
+## Environment variables
 
 * `TZ`: The timezone assigned to the container (default `UTC`)
 * `PUID`: EJT user id (default `1000`)
 * `PGID`: EJT group id (default `1000`)
 * `EJT_ACCOUNT_USERNAME`: Username of your EJT account to download the license server. Can be empty if you use a custom base url to download the ejtserver tarball without HTTP authentication
 * `EJT_ACCOUNT_PASSWORD`: Password linked to the username
-* `EJTSERVER_VERSION`: EJT License Server version to install. See the [official changelog](https://www.ej-technologies.com/license/changelog.html) for a curated list. (default `1.13.1`)
+* `EJTSERVER_VERSION`: EJT License Server version to install. See the [official changelog](https://www.ej-technologies.com/license/changelog.html) for a curated list. (default `1.13.2`)
 * `EJTSERVER_DOWNLOAD_BASEURL`: Base url where EJT License Server unix tarball can be downloaded (default `https://licenseserver.ej-technologies.com`)
 * `EJTSERVER_LICENSES`: Your floating licenses (comma delimited)
 * `EJTSERVER_DISPLAY_HOSTNAMES`: If you want to see host names instead of IP addresses (default `false`)
@@ -80,7 +77,7 @@ Image: crazymax/ejtserver:latest
 
 > 💡 `EJT_ACCOUNT_USERNAME_FILE`, `EJT_ACCOUNT_PASSWORD_FILE` and `EJTSERVER_LICENSES_FILE` can be used to fill in the value from a file, especially for Docker's secrets feature.
 
-### Volumes
+## Volumes
 
 * `/data`: Contains configuration and the downloaded EJT License Server unix tarball
 
@@ -92,11 +89,11 @@ In this folder you will find those files:
 
 > :warning: Note that the volumes should be owned by the user/group with the specified `PUID` and `PGID`. If you don't give the volume correct permissions, the container may not start.
 
-### Ports
+## Ports
 
 * `11862`: License server port
 
-### Commands
+## Commands
 
 You also have access to these commands from the container:
 

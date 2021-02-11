@@ -1,8 +1,6 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} adoptopenjdk:12-jre-hotspot as suexec
-
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
-RUN printf "I am running on ${BUILDPLATFORM:-linux/amd64}, building for ${TARGETPLATFORM:-linux/amd64}\n$(uname -a)\n"
 
 RUN  apt-get update \
   && apt-get install -y --no-install-recommends \
