@@ -3,6 +3,7 @@
 ## 1.14-r0 (2021/02/26)
 
 * EJT License Server 1.14
+* Downgrade to OpenJDK JRE 11
 
 ## 1.13.2-r0 (2021/02/11)
 
