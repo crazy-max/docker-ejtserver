@@ -83,7 +83,7 @@ Image: crazymax/ejtserver:latest
 * `PGID`: EJT group id (default `1000`)
 * `EJT_ACCOUNT_USERNAME`: Username of your EJT account to download the license server. Can be empty if you use a custom base url to download the ejtserver tarball without HTTP authentication
 * `EJT_ACCOUNT_PASSWORD`: Password linked to the username
-* `EJTSERVER_VERSION`: EJT License Server version to install. See the [official changelog](https://www.ej-technologies.com/license/changelog.html) for a curated list. (default `1.13.2`)
+* `EJTSERVER_VERSION`: EJT License Server version to install. See the [official changelog](https://www.ej-technologies.com/license/changelog.html) for a curated list. (default `1.14`)
 * `EJTSERVER_DOWNLOAD_BASEURL`: Base url where EJT License Server unix tarball can be downloaded (default `https://licenseserver.ej-technologies.com`)
 * `EJTSERVER_LICENSES`: Your floating licenses (comma delimited)
 * `EJTSERVER_DISPLAY_HOSTNAMES`: If you want to see host names instead of IP addresses (default `false`)

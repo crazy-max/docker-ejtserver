@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.14-r0 (2021/02/26)
+
+* EJT License Server 1.14
+
 ## 1.13.2-r0 (2021/02/11)
 
 * EJT License Server 1.13.2
