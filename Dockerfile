@@ -1,17 +1,5 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} adoptopenjdk:11-jre-hotspot as suexec
-
-RUN  apt-get update \
-  && apt-get install -y --no-install-recommends \
-    gcc \
-    libc-dev \
-  && curl -o /usr/local/bin/su-exec.c https://raw.githubusercontent.com/ncopa/su-exec/master/su-exec.c \
-  && gcc -Wall /usr/local/bin/su-exec.c -o/usr/local/bin/su-exec \
-  && chown root:root /usr/local/bin/su-exec \
-  && chmod 0755 /usr/local/bin/su-exec
-
-ARG TARGETPLATFORM
+FROM --platform=${TARGETPLATFORM:-linux/amd64} crazymax/gosu:latest AS gosu
 FROM --platform=${TARGETPLATFORM:-linux/amd64} adoptopenjdk:11-jre-hotspot
-
 LABEL maintainer="CrazyMax"
 
 ENV TZ="UTC" \
@@ -19,7 +7,7 @@ ENV TZ="UTC" \
   PGID="1000"
 
 COPY entrypoint.sh /entrypoint.sh
-COPY --from=suexec /usr/local/bin/su-exec /usr/local/bin/su-exec
+COPY --from=gosu / /
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \

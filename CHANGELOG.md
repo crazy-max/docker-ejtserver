@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.14-r1 (2021/03/02)
+
+* Switch to `gosu`
+
 ## 1.14-r0 (2021/02/26)
 
 * EJT License Server 1.14
