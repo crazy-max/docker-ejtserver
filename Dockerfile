@@ -1,5 +1,5 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} crazymax/gosu:latest AS gosu
-FROM --platform=${TARGETPLATFORM:-linux/amd64} adoptopenjdk:11-jre-hotspot
+FROM crazymax/gosu:latest AS gosu
+FROM adoptopenjdk:11-jre-hotspot
 LABEL maintainer="CrazyMax"
 
 ENV TZ="UTC" \
