@@ -120,4 +120,4 @@ EOL
 echo "Fixing perms..."
 chown -R ejt:ejt /data "${EJTSERVER_PATH}"
 
-exec gosu ejt:ejt "$@"
+exec yasu ejt:ejt "$@"

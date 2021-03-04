@@ -1,4 +1,4 @@
-FROM crazymax/gosu:latest AS gosu
+FROM crazymax/yasu:latest AS yasu
 FROM adoptopenjdk:11-jre-hotspot
 LABEL maintainer="CrazyMax"
 
@@ -7,7 +7,7 @@ ENV TZ="UTC" \
   PGID="1000"
 
 COPY entrypoint.sh /entrypoint.sh
-COPY --from=gosu / /
+COPY --from=yasu / /
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
