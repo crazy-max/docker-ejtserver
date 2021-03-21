@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.15-r0 (2021/03/21)
+
+* EJT License Server 1.15
+
 ## 1.14-r2 (2021/03/04)
 
 * Renamed `yasu` (more info https://github.com/crazy-max/yasu#yet-another)
