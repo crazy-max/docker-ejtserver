@@ -86,7 +86,7 @@ ln -sf /data/users.txt ${EJTSERVER_PATH}/users.txt
 
 # Check licenses
 echo "Checking licenses..."
-if [ -z "$EJTSERVER_LICENSES" ]; then
+if [[ -z "$EJTSERVER_LICENSES" && -z "$EJTSERVER_LICENSES_FILE" ]]; then
   echo "FATAL: At least one license is required to start the license server"
   exit 1
 fi
