@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.15.2-r0 (2021/11/21)
+
+* EJT License Server 1.15.2
+
 ## 1.15.1-r1 (2021/05/21)
 
 * Fix `EJTSERVER_LICENSES_FILE` (#29)
