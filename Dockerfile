@@ -8,7 +8,8 @@ ENV TZ="UTC" \
 COPY entrypoint.sh /entrypoint.sh
 COPY --from=yasu / /
 
-RUN apt-get update \
+RUN export DEBIAN_FRONTEND="noninteractive" \
+  && apt-get update \
   && apt-get install -y --no-install-recommends \
     bash \
     curl \
