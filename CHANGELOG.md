@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.16.1-r0 (2021/12/19)
+
+* EJT License Server 1.16.1
+
 ## 1.16-r0 (2021/12/15)
 
 * EJT License Server 1.16
