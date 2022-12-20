@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://hub.docker.com/r/crazymax/ejtserver/tags?page=1&ordering=last_updated"><img src="https://img.shields.io/github/v/tag/crazy-max/docker-ejtserver?label=version&style=flat-square" alt="Latest Version"></a>
-  <a href="https://github.com/crazy-max/docker-ejtserver/actions?workflow=build"><img src="https://img.shields.io/github/workflow/status/crazy-max/docker-ejtserver/build?label=build&logo=github&style=flat-square" alt="Build Status"></a>
+  <a href="https://github.com/crazy-max/docker-ejtserver/actions?workflow=build"><img src="https://img.shields.io/github/actions/workflow/status/crazy-max/docker-ejtserver/build.yml?branch=master&label=build&logo=github&style=flat-square" alt="Build Status"></a>
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/stars/crazymax/ejtserver.svg?style=flat-square&logo=docker" alt="Docker Stars"></a>
   <a href="https://hub.docker.com/r/crazymax/ejtserver/"><img src="https://img.shields.io/docker/pulls/crazymax/ejtserver.svg?style=flat-square&logo=docker" alt="Docker Pulls"></a>
   <br /><a href="https://github.com/sponsors/crazy-max"><img src="https://img.shields.io/badge/sponsor-crazy--max-181717.svg?logo=github&style=flat-square" alt="Become a sponsor"></a>
