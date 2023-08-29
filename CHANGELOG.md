@@ -70,10 +70,10 @@
 > :warning: **UPGRADE NOTES**
 > As the Docker container now runs as a non-root user, you have to first stop the container and change permissions to `data` volume:
 > ```
-> docker-compose stop
+> docker compose stop
 > chown -R 1000:1000 data/
-> docker-compose pull
-> docker-compose up -d
+> docker compose pull
+> docker compose up -d
 > ```
 
 ## 1.13.1-RC4 (2019/08/04)

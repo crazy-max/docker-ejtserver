@@ -60,10 +60,10 @@ docker buildx bake image-all
 
 ## Image
 
-| Registry                                                                                         | Image                           |
-|--------------------------------------------------------------------------------------------------|---------------------------------|
-| [Docker Hub](https://hub.docker.com/r/crazymax/ejtserver/)                                            | `crazymax/ejtserver`                 |
-| [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/ejtserver)  | `ghcr.io/crazy-max/ejtserver`        |
+| Registry                                                                                             | Image                         |
+|------------------------------------------------------------------------------------------------------|-------------------------------|
+| [Docker Hub](https://hub.docker.com/r/crazymax/ejtserver/)                                           | `crazymax/ejtserver`          |
+| [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/ejtserver) | `ghcr.io/crazy-max/ejtserver` |
 
 Following platforms for this image are available:
 
@@ -91,7 +91,9 @@ Image: crazymax/ejtserver:latest
 * `EJTSERVER_DISPLAY_HOSTNAMES`: If you want to see host names instead of IP addresses (default `false`)
 * `EJTSERVER_LOG_LEVEL`: [Log4J log level](https://logging.apache.org/log4j/2.x/manual/customloglevels.html) of the EJT License Server (default `INFO`)
 
-> 💡 `EJT_ACCOUNT_USERNAME_FILE`, `EJT_ACCOUNT_PASSWORD_FILE` and `EJTSERVER_LICENSES_FILE` can be used to fill in the value from a file, especially for Docker's secrets feature.
+> 💡 `EJT_ACCOUNT_USERNAME_FILE`, `EJT_ACCOUNT_PASSWORD_FILE` and
+> `EJTSERVER_LICENSES_FILE` can be used to fill in the value from a file,
+> especially for Docker's secrets feature.
 
 ## Volumes
 
@@ -101,9 +103,11 @@ In this folder you will find those files:
 
 * `ejtserver_unix_*.tar.gz`: The downloaded EJT License Server unix tarball
 * `ip.txt`: If you would like to allow only certain IP addresses, enter one IP address per line. If no IP addresses are entered, all IP addresses will be allowed. You can specify IP masks, such as 192.168.2.*
-* `users.txt`: If you would like to allow only certain user names, please enter one user name per line. If no user names are entered, all user names will be allowed
+* `users.txt`: If you would like to allow only certain usernames, please enter one username per line. If no usernames are entered, all usernames will be allowed
 
-> :warning: Note that the volumes should be owned by the user/group with the specified `PUID` and `PGID`. If you don't give the volume correct permissions, the container may not start.
+> :warning: Note that the volumes should be owned by the user/group with the
+> specified `PUID` and `PGID`. If you don't give the volume correct permissions,
+> the container may not start.
 
 ## Ports
 
@@ -119,20 +123,21 @@ You also have access to these commands from the container:
 Usage:
 
 ```bash
-docker-compose exec ejtserver admin list
+docker compose exec ejtserver admin list
 ```
 
 ## Usage
 
 ### Docker Compose
 
-Docker compose is the recommended way to run this image. Copy the content of folder
-[examples/compose](examples/compose) in `/var/ejtserver/` on your host for example. Edit the compose and env files with
-your preferences and run the following commands:
+Docker compose is the recommended way to run this image. Copy the content of
+folder [examples/compose](examples/compose) in `/var/ejtserver/` on your host
+for example. Edit the compose and env files with your preferences and run the
+following commands:
 
 ```bash
-docker-compose up -d
-docker-compose logs -f
+docker compose up -d
+docker compose logs -f
 ```
 
 ### Command line
@@ -154,52 +159,60 @@ docker run -d -p 11862:11862 --name ejtserver \
 Recreate the container whenever I push an update:
 
 ```bash
-docker-compose pull
-docker-compose up -d
+docker compose pull
+docker compose up -d
 ```
 
 ## Notes
 
 ### How to use your floating license?
 
-[ej-technologies'](https://www.ej-technologies.com/) products offer a floating license mode in the license dialog.
-Choose `Help -> Enter License Key` from the main menu in the JProfiler GUI or the install4j IDE and select
-the **Floating license** radio button.
+[ej-technologies'](https://www.ej-technologies.com/) products offer a floating
+license mode in the license dialog. Choose `Help -> Enter License Key` from the
+main menu in the JProfiler GUI or the install4j IDE and select the
+**Floating license** radio button.
 
-The "Name" and "Company" fields are informational only, unless you choose to restrict the allowed values for the
-"Name" field as described in README.TXT. In the license server field you have to enter the hostname of the computer
-where the license server is running. Instead of a host name, an IP address can also be used.
+The "Name" and "Company" fields are informational only, unless you choose to
+restrict the allowed values for the "Name" field as described in README.TXT.
+In the license server field you have to enter the hostname of the computer
+where the license server is running. Instead of a host name, an IP address can
+also be used.
 
-If have a floating license for a certain major version of a product, you can use older versions of the same product
-with that floating license as well.
+If have a floating license for a certain major version of a product, you can
+use older versions of the same product with that floating license as well.
 
-Should you require any additional assistance, please contact **support@ej-technologies.com**
+Should you require any additional assistance, please contact
+**support@ej-technologies.com**.
 
 ### User groups
 
-If you want to partition keys to different groups of users, you can define groups in the file `license.txt` and the
-access control files `users.txt` and `ip.txt` by inserting group headers:
+If you want to partition keys to different groups of users, you can define
+groups in the file `license.txt` and the access control files `users.txt` and
+`ip.txt` by inserting group headers:
 
 ```
    [group]
 ```
 
-All entries after a group header belong to that group until a new group is started. If no group has been started,
-entries are added to the "default" group.
+All entries after a group header belong to that group until a new group is
+started. If no group has been started, entries are added to the "default" group.
 
-Users are assigned to a group based on the defined groups in the access control files. If users are defined in
-`users.txt`, the group is determined by the that file. If the resulting group is the default group, the `ip.txt` file
-will be used for determining the associated group. If the users.txt file is empty, only the ip.txt file will be used.
+Users are assigned to a group based on the defined groups in the access control
+files. If users are defined in `users.txt`, the group is determined by the that
+file. If the resulting group is the default group, the `ip.txt` file will be
+used for determining the associated group. If the users.txt file is empty, only
+the ip.txt file will be used.
 
-In order to partition a single key to different groups in the `license.txt` file, add the key to multiple groups
-with the following syntax:
+In order to partition a single key to different groups in the `license.txt`
+file, add the key to multiple groups with the following syntax:
 
 ```
    n:key
 ```
 
-where n is the number of concurrent users that should be assigned to the current group. Use different values of n
-in different groups that add up to the maximum number of current users for the key. For example:
+where n is the number of concurrent users that should be assigned to the
+current group. Use different values of `n` in different groups that add up to
+the maximum number of current users for the `key`. For example:
 
 ```
 [groupA]
@@ -208,8 +221,8 @@ in different groups that add up to the maximum number of current users for the k
 6:F-95-10-xxx
 ```
 
-splits the 10-user key F-95-10-xxx into 4 concurrent users for `[groupA]` and 6 concurrent users for `[groupB]`.
-In `users.txt`, the groups would be defined as:
+splits the 10-user key F-95-10-xxx into 4 concurrent users for `[groupA]` and 6
+concurrent users for `[groupB]`. In `users.txt`, the groups would be defined as:
 
 ```
 [groupA]
@@ -233,7 +246,7 @@ Alternatively, the `ip.txt` file could define groups as:
 192.162.2.*
 ```
 
-Group names are shown in the log file next to the user name.
+Group names are shown in the log file next to the username.
 
 ## Contributing
 
