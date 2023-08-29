@@ -1,0 +1,17 @@
+name: ejtserver
+
+services:
+  ejtserver:
+    image: ${EJTSERVER_IMAGE:-crazymax/ejtserver}
+    container_name: ${EJTSERVER_CONTAINER:-ejtserver}
+    ports:
+      - "11862:11862"
+    volumes:
+      - "./data:/data"
+    env_file:
+      - "./ejtserver.env"
+    environment:
+      - "EJT_ACCOUNT_USERNAME"
+      - "EJT_ACCOUNT_PASSWORD"
+      - "EJTSERVER_LICENSES"
+    restart: always
