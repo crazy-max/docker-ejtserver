@@ -67,14 +67,13 @@ docker buildx bake image-all
 Following platforms for this image are available:
 
 ```
-$ docker run --rm mplatform/mquery crazymax/ejtserver:latest
-Image: crazymax/ejtserver:latest
- * Manifest List: Yes
- * Supported platforms:
-   - linux/amd64
-   - linux/arm64
-   - linux/ppc64le
-   - linux/s390x
+$ docker buildx imagetools inspect crazymax/ejtserver --format "{{json .Manifest}}" | \
+  jq -r '.manifests[] | select(.platform.os != null and .platform.os != "unknown") | .platform | "\(.os)/\(.architecture)\(if .variant then "/" + .variant else "" end)"'
+
+linux/amd64
+linux/arm64
+linux/ppc64le
+linux/s390x
 ```
 
 ## Environment variables
