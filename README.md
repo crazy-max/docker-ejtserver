@@ -88,6 +88,7 @@ linux/s390x
 * `EJTSERVER_LICENSES`: Your floating licenses (comma delimited)
 * `EJTSERVER_DISPLAY_HOSTNAMES`: If you want to see host names instead of IP addresses (default `false`)
 * `EJTSERVER_LOG_LEVEL`: [Log4J log level](https://logging.apache.org/log4j/2.x/manual/customloglevels.html) of the EJT License Server (default `INFO`)
+* `EJTSERVER_VMOPTIONS`: Can be specified if you want to append some vmoptions to the ejtserver jvm
 
 > 💡 `EJT_ACCOUNT_USERNAME_FILE`, `EJT_ACCOUNT_PASSWORD_FILE` and
 > `EJTSERVER_LICENSES_FILE` can be used to fill in the value from a file,
