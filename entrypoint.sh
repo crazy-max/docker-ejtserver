@@ -117,7 +117,23 @@ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
 log4j.appender.stdout.layout.ConversionPattern=[%p] - %d{ISO8601} - %m%n
 EOL
 
-echo "Fixing perms..."
-chown -R ejt:ejt /data "${EJTSERVER_PATH}"
+# Check if any files or directories have incorrect ownership
+if find /data "${EJTSERVER_PATH}" ! -user ejt -o ! -group ejt | grep -q .; then
+  if [ "$(id -u)" -eq 0 ]; then
+    echo "Some files or directories under /data have incorrect ownership. Changing ownership to ejt:ejt."
+    chown -R ejt:ejt /data "${EJTSERVER_PATH}"
+  else
+    echo "Some files or directories under /data have incorrect ownership, but you are not root. Skipping ownership change."
+  fi
+else
+  echo "All files and directories under /data already have the correct ownership. No changes needed."
+fi
 
-exec yasu ejt:ejt "$@"
+# Check if the script is already running as the 'ejt' user
+if [ "$(id -un)" = "ejt" ] && [ "$(id -gn)" = "ejt" ]; then
+  echo "Executing license server directly, because user and group matched the current"
+  exec "$@"
+else
+  echo "Switching user context and execute license server..."
+  exec yasu ejt:ejt "$@"
+fi
