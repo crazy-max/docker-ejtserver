@@ -46,10 +46,14 @@ if [ -n "${PUID}" ] && [ "${PUID}" != "$(id -u ejt)" ]; then
   sed -i -e "s/^ejt:\([^:]*\):[0-9]*:\([0-9]*\)/ejt:\1:${PUID}:\2/" /etc/passwd
 fi
 
-# Timezone
-echo "Setting timezone to ${TZ}..."
-ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
-echo ${TZ} > /etc/timezone
+# Check if the script has root privileges and update timezone, if possible
+if [ "$(id -u)" -eq 0 ]; then
+    ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
+    echo "${TZ}" > /etc/timezone
+    echo "Timezone successfully set to ${TZ}."
+else
+    echo "You do not have root privileges. The current timezone stays at ${TZ}."
+fi
 
 # Download ejtserver tarball
 file_env 'EJT_ACCOUNT_USERNAME'
