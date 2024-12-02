@@ -121,6 +121,10 @@ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
 log4j.appender.stdout.layout.ConversionPattern=[%p] - %d{ISO8601} - %m%n
 EOL
 
+# VM Options
+echo "Updating VMOptions..."
+echo "${EJTSERVER_VMOPTIONS}" >> ${EJTSERVER_PATH}/bin/ejtserver.vmoptions
+
 # Check if any files or directories have incorrect ownership
 if find /data "${EJTSERVER_PATH}" ! -user ejt -o ! -group ejt | grep -q .; then
   if [ "$(id -u)" -eq 0 ]; then
