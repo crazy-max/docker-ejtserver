@@ -46,10 +46,14 @@ if [ -n "${PUID}" ] && [ "${PUID}" != "$(id -u ejt)" ]; then
   sed -i -e "s/^ejt:\([^:]*\):[0-9]*:\([0-9]*\)/ejt:\1:${PUID}:\2/" /etc/passwd
 fi
 
-# Timezone
-echo "Setting timezone to ${TZ}..."
-ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
-echo ${TZ} > /etc/timezone
+# Check if the script has root privileges and update timezone, if possible
+if [ "$(id -u)" -eq 0 ]; then
+    ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
+    echo "${TZ}" > /etc/timezone
+    echo "Timezone successfully set to ${TZ}."
+else
+    echo "You do not have root privileges. The current timezone stays at ${TZ}."
+fi
 
 # Download ejtserver tarball
 file_env 'EJT_ACCOUNT_USERNAME'
@@ -117,7 +121,27 @@ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
 log4j.appender.stdout.layout.ConversionPattern=[%p] - %d{ISO8601} - %m%n
 EOL
 
-echo "Fixing perms..."
-chown -R ejt:ejt /data "${EJTSERVER_PATH}"
+# VM Options
+echo "Updating VMOptions..."
+echo "${EJTSERVER_VMOPTIONS}" >> ${EJTSERVER_PATH}/bin/ejtserver.vmoptions
 
-exec yasu ejt:ejt "$@"
+# Check if any files or directories have incorrect ownership
+if find /data "${EJTSERVER_PATH}" ! -user ejt -o ! -group ejt | grep -q .; then
+  if [ "$(id -u)" -eq 0 ]; then
+    echo "Some files or directories under /data have incorrect ownership. Changing ownership to ejt:ejt."
+    chown -R ejt:ejt /data "${EJTSERVER_PATH}"
+  else
+    echo "Some files or directories under /data have incorrect ownership, but you are not root. Skipping ownership change."
+  fi
+else
+  echo "All files and directories under /data already have the correct ownership. No changes needed."
+fi
+
+# Check if the script is already running as the 'ejt' user
+if [ "$(id -un)" = "ejt" ] && [ "$(id -gn)" = "ejt" ]; then
+  echo "Executing license server directly, because user and group matched the current"
+  exec "$@"
+else
+  echo "Switching user context and execute license server..."
+  exec yasu ejt:ejt "$@"
+fi
