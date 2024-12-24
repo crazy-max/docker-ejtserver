@@ -9,6 +9,12 @@
   <a href="https://www.paypal.me/crazyws"><img src="https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square" alt="Donate Paypal"></a>
 </p>
 
+## ⚠️ Abandoned project
+
+Since EJT License Server 2.0, a Dockerfile is available in the unix tarball to
+build an image yourself. Therefore, this project is abandoned but feel free to
+fork and make your own changes if needed.
+
 ## About
 
 [EJT License Server](https://www.ej-technologies.com/license/files) Docker image.
